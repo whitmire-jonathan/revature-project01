@@ -44,8 +44,7 @@ public class TestCasesSteps {
         Thread.sleep(1000);
     }
     @Then("A test case modal should appear showing the case ID")
-    public void a_test_case_modal_should_appear_showing_the_case_id() throws InterruptedException {
-        Thread.sleep(1000);
+    public void a_test_case_modal_should_appear_showing_the_case_id() {
         String caseModalId = BasicRunner.driver.findElement(By.xpath("//body/div[3]/div[1]/div[1]/h3[1]")).getText();
         Assert.assertTrue(caseModalId.contains("Case"));
     }

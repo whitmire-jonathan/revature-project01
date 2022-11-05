@@ -56,8 +56,8 @@ public class LoginPositiveSteps {
         WebElement passwordInput = BasicRunner.driver.findElement(By.xpath("//body/div[@id='root']/fieldset[1]/input[2]"));
         passwordInput.sendKeys("alucard");
     }
-    @Then("The employee should see their name Dracula Fangs on the home page")
-    public void the_employee_should_see_their_name_dracula_fangs_on_the_home_page() throws InterruptedException {
+    @Then("The employee should see their name Dracula FangsCheck on the home page")
+    public void the_employee_should_see_their_name_dracula_fangs_check_on_the_home_page() throws InterruptedException {
         Thread.sleep(1000);
         String dfName = BasicRunner.driver.findElement(By.xpath("//body/div[@id='root']/nav[1]/p[1]")).getText();
         Assert.assertEquals(dfName, "Welcome Dracula Fangs");
