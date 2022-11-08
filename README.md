@@ -1,0 +1,3 @@
+# revature-project01
+Bug Catcher application cucumber test files
+In this project I was given cucumber Scenario files which outlined requirements for a web application used to report and assign bugs. There was a basic login page with files testing positive and negative scenarios related to the login functions. There was a manager and employee homepage, which contained different functions. This is Java based code that incoporates selenium to automate tests for all of the bug catcher functions found within each user type (manager, employee). Assertions were made based on the automation to test if the functions of this webbased app was working as the scenario files suggested.
