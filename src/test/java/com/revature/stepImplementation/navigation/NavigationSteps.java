@@ -88,4 +88,28 @@ public class NavigationSteps {
         Thread.sleep(1000);
         //bug
     }
+    @Then("The title of page should be Matrix Dashboard")
+    public void the_title_of_page_should_be_matrix_dashboard() throws InterruptedException {
+        String matrixDashboard = BasicRunner.driver.getTitle();
+        Assert.assertEquals(matrixDashboard, "Matrix Dashboard");
+        Thread.sleep(1000);
+    }
+    @Then("The title of page should be Test Cases")
+    public void the_title_of_page_should_be_test_cases() throws InterruptedException {
+        String testCases = BasicRunner.driver.getTitle();
+        Assert.assertEquals(testCases, "Test Cases");
+        Thread.sleep(1000);
+    }
+    @Then("The title of page should be Case Reporter")
+    public void the_title_of_page_should_be_case_reporter() throws InterruptedException {
+        String caseReporter = BasicRunner.driver.getTitle();
+        Assert.assertEquals(caseReporter, "Case Reporter");
+        Thread.sleep(1000);
+    }
+    @Then("The title of page should be Case Overview")
+    public void the_title_of_page_should_be_case_overview() throws InterruptedException {
+        String caseOverview = BasicRunner.driver.getTitle();
+        Assert.assertEquals(caseOverview, "Case Overview");
+        Thread.sleep(1000);
+    }
 }

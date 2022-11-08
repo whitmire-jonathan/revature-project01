@@ -12,7 +12,7 @@ public class HomePageTester {
     @FindBy(xpath="//a[contains(@href,'/testcases')]")
     public WebElement testCasesLink;
 
-    @FindBy(xpath="//a[contains(@href,'/defectreporter')]")
+    @FindBy(xpath="//div/nav/a[contains(text(),'Report a Defect')]")
     public WebElement reportADefectLink;
 
     @FindBy(xpath="//a[contains(@href,'/defectoverview')]")

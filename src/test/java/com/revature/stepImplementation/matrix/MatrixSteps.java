@@ -25,7 +25,7 @@ public class MatrixSteps {
         matrixButton.click();
         Thread.sleep(1000);
         String matrixFormHeader = BasicRunner.homePageManager.createMatrixTitle.getText();
-        Assert.assertEquals(matrixFormHeader, "New Matrix");
+        Assert.assertEquals(matrixFormHeader, "New matrix");
     }
     @When("A manager creates a title for a matrix")
     public void a_manager_creates_a_title_for_a_matrix() {
@@ -47,30 +47,35 @@ public class MatrixSteps {
     public void a_manager_saves_a_matrix() throws InterruptedException {
         BasicRunner.homePageManager.createMatrixButton.click();
         Thread.sleep(1000);
+        BasicRunner.driver.switchTo().alert().accept();
+        Thread.sleep(1000);
         BasicRunner.homePageManager.matricesLink.click();
         Thread.sleep(1000);
     }
     @Then("The matrix should be visible for all testers and managers")
     public void the_matrix_should_be_visible_for_all_testers_and_managers() throws InterruptedException {
-        String newMatrixCreatedManagerPage = BasicRunner.driver.findElement(By.xpath("//li[contains(text(), 'New requirement for matrix')]")).getText();
-        Assert.assertEquals(newMatrixCreatedManagerPage, "New requirement for matrix");
+        boolean newMatrixCreatedManagerPage = BasicRunner.driver.findElement(By.xpath("//li[contains(text(), 'New Matrix Title')]")).isDisplayed();
+        Assert.assertTrue(newMatrixCreatedManagerPage);
         Thread.sleep(1000);
         BasicRunner.homePageManager.logOutLink.click();
         Thread.sleep(1000);
-        BasicRunner.loginPage.usernameInput.sendKeys("ryeguy");
+        BasicRunner.driver.get("https://bugcatcher-jasdhir.coe.revaturelabs.com/?dev=11");
+        Thread.sleep(1000);
+        BasicRunner.loginPage.usernameInput.sendKeys("ryeGuy");
         BasicRunner.loginPage.passwordInput.sendKeys("coolbeans");
         Thread.sleep(1000);
         BasicRunner.loginPage.loginButton.click();
         Thread.sleep(1000);
         BasicRunner.homePageTester.matricesLink.click();
         Thread.sleep(1000);
-        String newMatrixCreatedTesterPage = BasicRunner.driver.findElement(By.xpath("//li[contains(text(), 'New requirement for matrix')]")).getText();
-        Assert.assertEquals(newMatrixCreatedTesterPage, "New requirement for matrix");
+        boolean newMatrixCreatedTesterPage = BasicRunner.driver.findElement(By.xpath("//li[contains(text(), 'New Matrix Title')]")).isDisplayed();
+        Assert.assertTrue(newMatrixCreatedTesterPage);
         Thread.sleep(1000);
         BasicRunner.homePageTester.logOutLink.click();
     }
     @Given("A manager or tester has selected a matrix")
     public void a_manager_or_tester_has_selected_a_matrix() throws InterruptedException {
+        BasicRunner.driver.get("https://bugcatcher-jasdhir.coe.revaturelabs.com/?dev=11");
         BasicRunner.loginPage.usernameInput.sendKeys("g8tor");
         BasicRunner.loginPage.passwordInput.sendKeys("chomp!");
         Thread.sleep(1000);
@@ -79,6 +84,7 @@ public class MatrixSteps {
         BasicRunner.homePageManager.matricesLink.click();
         Thread.sleep(1000);
         BasicRunner.matrixDashboardPageManager.matrixShowButton.click();
+        Thread.sleep(1000);
     }
     String deletedDefect;
     @When("A manager or tester adds or removes defects")
@@ -97,7 +103,6 @@ public class MatrixSteps {
     public void a_manager_or_tester_confirms_their_changes() {
         String newDefectList = BasicRunner.driver.findElement(By.xpath("//tbody/tr[1]/td[4]")).getText();
         Assert.assertNotEquals(newDefectList, deletedDefect);
-
     }
     @Then("Then the matrix should saved")
     public void then_the_matrix_should_saved() {

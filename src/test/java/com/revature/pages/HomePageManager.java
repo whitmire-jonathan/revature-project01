@@ -25,9 +25,6 @@ public class HomePageManager {
     @FindBy(xpath="//title")
     public WebElement managerHomePageTitle;
 
-    @FindBy(xpath="//tr/td/button[1]")
-    public WebElement selectFirstDefectButton;
-
     @FindBy(xpath="//button[contains(text(), 'Create A new Requirements Matrix')]")
     public WebElement createNewMatrixButton;
     @FindBy(xpath="//h2[contains(text(),'New matrix')]")
@@ -47,6 +44,9 @@ public class HomePageManager {
 
     @FindBy(xpath="//button[contains(text(),'Create Matrix')]")
     public WebElement createMatrixButton;
+
+    @FindBy(xpath = "//button[contains(text(),'Assign')]")
+    public WebElement assignButton;
 
     public HomePageManager(WebDriver driver) {
         PageFactory.initElements(driver, this);

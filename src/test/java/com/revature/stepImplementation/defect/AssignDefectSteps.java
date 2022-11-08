@@ -33,26 +33,28 @@ public class AssignDefectSteps {
         Assert.assertTrue(pendingDefects);
     }
     public String defectDesc;
+    public String defectDescId;
     @When("The manager clicks on the select button for a defect")
     public void the_manager_clicks_on_the_select_button_for_a_defect() {
         WebElement defectSelectButton = BasicRunner.driver.findElement(By.xpath("//tbody/tr[1]/td[3]/button[1]"));
         defectSelectButton.click();
-        defectDesc = BasicRunner.driver.findElement(By.xpath("//tboyd/tr[1]/td[1]")).getText();
     }
     @Then("The defect description should appear in bold")
-    public void the_defect_description_should_appear_in_bold() {
-        WebElement defectDescription = BasicRunner.driver.findElement(By.xpath("//h4"));
-        Assert.assertEquals(defectDescription.getTagName(), "b");
+    public void the_defect_description_should_appear_in_bold() throws InterruptedException {
+        defectDesc = BasicRunner.driver.findElement(By.xpath("//div[@id='root']/div/h4")).getCssValue("font-weight");
+        Assert.assertEquals(defectDesc, "700");
+        Thread.sleep(1000);
+        defectDescId = BasicRunner.driver.findElement(By.xpath("//tbody/tr[1]/td[1]")).getText();
     }
     @When("The manager selects a tester from the drop down")
     public void the_manager_selects_a_tester_from_the_drop_down() {
-        Select dropDownList = new Select(BasicRunner.driver.findElement(By.xpath("//body/div[@id='root']/div[1]/input[1]")));
-        dropDownList.selectByIndex(1);
+        WebElement testerSelectInput = BasicRunner.driver.findElement(By.xpath("//body/div[@id='root']/div[1]/input[1]"));
+        testerSelectInput.sendKeys("ryeGuy");
     }
     @When("The manager clicks assign")
-    public void the_manager_clicks_assign() {
-        WebElement clickAssign = BasicRunner.driver.findElement(By.xpath("//button[contains(text(),'Assign')]"));
-        clickAssign.click();
+    public void the_manager_clicks_assign() throws InterruptedException {
+        BasicRunner.homePageManager.assignButton.click();
+        Thread.sleep(1000);
     }
     @Then("The defect should disappear from the list")
     public void the_defect_should_disappear_from_the_list() {
@@ -62,7 +64,7 @@ public class AssignDefectSteps {
     @Given("The assigned tester is on their home page")
     public void the_assigned_tester_is_on_their_home_page() throws InterruptedException {
         BasicRunner.driver.get("https://bugcatcher-jasdhir.coe.revaturelabs.com/?dev=11");
-        BasicRunner.loginPage.usernameInput.sendKeys("ryeguy");
+        BasicRunner.loginPage.usernameInput.sendKeys("ryeGuy");
         BasicRunner.loginPage.passwordInput.sendKeys("coolbeans");
         BasicRunner.loginPage.loginButton.click();
         Thread.sleep(1000);
@@ -74,7 +76,7 @@ public class AssignDefectSteps {
         List<WebElement> testerDefectList = BasicRunner.driver.findElements(By.xpath("//ul/li//b"));
         boolean flag = false;
         for (WebElement x : testerDefectList) {
-            if (x.getText().contains(defectDesc)){
+            if (x.getText().contains(defectDescId)){
                 flag = true;
             }
         }
